@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+    {#SEO openGraph#}
+    <meta property="og:title" content="Awishka-Music" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://awishka-music.com" />
+    <meta property="og:image" content="http://awishka-music.com/logos/logo2.png" />
+    <meta property="og:description"
+        content="awishka-music.com est une site de téléchargement de musiques basé au mali." />
+    {#end SEO openGraph#}
+    {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}{% endblock %}
+    {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</body>
+
+</html>

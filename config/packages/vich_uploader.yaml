@@ -1,0 +1,16 @@
+vich_uploader:
+  db_driver: orm
+  mappings:
+    music_files:
+      uri_prefix: /upload/music/songs
+      upload_destination: "%kernel.project_dir%/public/upload/music/songs"
+      # namer: Vich\UploaderBundle\Naming\OrignameNamer
+    music_images:
+      uri_prefix: /upload/music/images
+      upload_destination: "%kernel.project_dir%/public/upload/music/images"
+    album_covers:
+      uri_prefix: /upload/album/covers
+      upload_destination: "%kernel.project_dir%/public/upload/album/covers"
+    profiles:
+      uri_prefix: /upload/user/profiles
+      upload_destination: "%kernel.project_dir%/public/upload/user/profiles"
