@@ -13,6 +13,7 @@ import Axios from "axios";
 // eslint-disable-next-line no-unused-vars
 import React, { useContext, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
+import { extractUrl } from "../../helpers";
 import RouteContext from "../RouteContext";
 import Titles from "./Titles";
 
@@ -98,7 +99,7 @@ const Musics = ({ history }) => {
 									<CardMedia
 										component="img"
 										alt={item.title}
-										image={item.coverUrl}
+										image={extractUrl(item.coverUrl)}
 										className={classes.image}
 									/>
 								) : (

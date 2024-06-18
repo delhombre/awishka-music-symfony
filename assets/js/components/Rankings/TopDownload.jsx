@@ -4,15 +4,16 @@ import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
-import { cyan } from "@material-ui/core/colors";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { cyan } from "@material-ui/core/colors";
+import { makeStyles } from "@material-ui/core/styles";
 import GetAppRoundedIcon from "@material-ui/icons/GetAppRounded";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import { extractUrl } from "../../helpers";
 import { UsePagination } from "../../hooks/UsePagination";
 import musicAPI from "../../services/musicAPI";
 import Titles from "./Titles";
@@ -32,15 +33,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 	background: {
 		background: "white",
+		padding: theme.spacing(4),
+		borderRadius: theme.spacing(2),
 	},
 }));
 
 const TopDownload = ({ history }) => {
 	const classes = useStyles();
 
-	const { items: musics, loading, load, hasMore } = UsePagination(
-		"/apip/music?itemsPerPage=5&order[downloadCount]=desc"
-	);
+	const {
+		items: musics,
+		loading,
+		load,
+		hasMore,
+	} = UsePagination("/apip/music?itemsPerPage=5&order[downloadCount]=desc");
 
 	const { download } = musicAPI;
 
@@ -50,7 +56,10 @@ const TopDownload = ({ history }) => {
 
 	return (
 		<>
-			<Titles title="Titres les plus téléchargés" />
+			<Titles
+				title="Titres les plus téléchargés"
+				style={{ marginTop: "2rem", marginBottom: "2rem" }}
+			/>
 			<div className={classes.background}>
 				{(loading ? Array.from(new Array(5)) : musics).map((music, index) => (
 					<Grid
@@ -80,7 +89,7 @@ const TopDownload = ({ history }) => {
 											className={classes.image}
 											component="img"
 											alt=""
-											image={music.coverUrl}
+											image={extractUrl(music.coverUrl)}
 										/>
 									</CardActionArea>
 								</Card>

@@ -12,6 +12,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import { extractUrl } from "../../helpers";
 import { UsePagination } from "../../hooks/UsePagination";
 import Titles from "../Rankings/Titles";
 
@@ -38,9 +39,13 @@ const useStyles = makeStyles((theme) => ({
 const AllAlbums = ({ history }) => {
 	const classes = useStyles();
 
-	const { items: albums, loading, load, count, hasMore } = UsePagination(
-		"/apip/albums"
-	);
+	const {
+		items: albums,
+		loading,
+		load,
+		count,
+		hasMore,
+	} = UsePagination("/apip/albums");
 
 	useEffect(() => {
 		load();
@@ -70,7 +75,7 @@ const AllAlbums = ({ history }) => {
 										component="img"
 										alt={album.title}
 										title={album.title}
-										image={album.coverUrl}
+										image={extractUrl(album.coverUrl)}
 										className={classes.image}
 									/>
 									<CardContent>

@@ -6,12 +6,13 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
+import { extractUrl } from "../../helpers";
 import RouteContext from "../RouteContext";
 import HorizontalScroll from "./HorizontalScroll";
 import Titles from "./Titles";
@@ -85,7 +86,7 @@ const Albums = ({ history }) => {
 									component="img"
 									alt={album.title}
 									className={classes.media}
-									image={album.coverUrl}
+									image={extractUrl(album.coverUrl)}
 									title={album.title}
 								/>
 							) : (

@@ -17,6 +17,7 @@ import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
 import GetAppRoundedIcon from "@material-ui/icons/GetAppRounded";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { extractUrl } from "../../helpers";
 import musicAPI from "../../services/musicAPI";
 
 const useStyles = makeStyles((theme) => ({
@@ -123,7 +124,10 @@ const AlbumShow = (props) => {
 								</div>
 							</CardContent>
 						</div>
-						<CardMedia className={classes.cover} image={album.coverUrl} />
+						<CardMedia
+							className={classes.cover}
+							image={extractUrl(album.coverUrl)}
+						/>
 					</Card>
 				)}
 

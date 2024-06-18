@@ -7,7 +7,8 @@ import React from "react";
 const useStyles = makeStyles((theme) => ({
 	footer: {
 		padding: theme.spacing(3, 2),
-		marginTop: theme.spacing(2),
+		// marginTop: theme.spacing(2),
+		marginTop: "auto",
 		backgroundColor:
 			theme.palette.type === "light"
 				? theme.palette.grey[200]
@@ -27,7 +28,7 @@ function Copyright() {
 			<Link color="inherit" href="/">
 				Awishka Music
 			</Link>{" "}
-			{new Date().getFullYear()}
+			2020 - {new Date().getFullYear()}
 			{"."}
 		</Typography>
 	);
@@ -43,7 +44,9 @@ const Footer = () => {
 				<Copyright />
 				<Typography className={classes.developer}>
 					Dévéloppeur:{" "}
-					<Link href="https://wa.me/22375604137">Bruno Dogbase.</Link>
+					<Link href="https://www.linkedin.com/in/bruno-dogbase/">
+						Bruno Dogbase.
+					</Link>
 				</Typography>
 			</Container>
 		</footer>

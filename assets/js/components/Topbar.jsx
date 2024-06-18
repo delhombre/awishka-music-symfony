@@ -2,8 +2,8 @@
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
 import Slide from "@material-ui/core/Slide";
-import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
+import { makeStyles } from "@material-ui/core/styles";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
@@ -64,7 +64,7 @@ const Topbar = (props) => {
 
 	return (
 		<>
-			<div style={{ display: "flex", flexGrow: 1 }}>
+			<div style={{ display: "flex" }}>
 				<HideOnScroll {...props}>
 					<AppBar className={classes.appbar}>
 						<Toolbar>

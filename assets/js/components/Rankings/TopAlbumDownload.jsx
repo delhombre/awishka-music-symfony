@@ -4,11 +4,12 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import { extractUrl } from "../../helpers";
 import { UsePagination } from "../../hooks/UsePagination";
 import Titles from "./Titles";
 
@@ -22,15 +23,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 	background: {
 		background: "white",
+		padding: theme.spacing(4),
+		borderRadius: theme.spacing(2),
 	},
 }));
 
 const TopAlbumDownload = ({ history }) => {
 	const classes = useStyles();
 
-	const { items: albums, loading, load, hasMore } = UsePagination(
-		"/apip/albums?itemsPerPage=3&order[countOfDownloads]=desc"
-	);
+	const {
+		items: albums,
+		loading,
+		load,
+		hasMore,
+	} = UsePagination("/apip/albums?itemsPerPage=3&order[countOfDownloads]=desc");
 
 	useEffect(() => {
 		load();
@@ -38,7 +44,10 @@ const TopAlbumDownload = ({ history }) => {
 
 	return (
 		<>
-			<Titles title="Albums les plus téléchargés" />
+			<Titles
+				title="Albums les plus téléchargés"
+				style={{ marginTop: "2rem", marginBottom: "2rem" }}
+			/>
 			<div className={classes.background}>
 				{(loading ? Array.from(new Array(3)) : albums).map((album, index) => (
 					<Grid
@@ -67,7 +76,7 @@ const TopAlbumDownload = ({ history }) => {
 											className={classes.image}
 											component="img"
 											alt={album.title}
-											image={album.coverUrl}
+											image={extractUrl(album.coverUrl)}
 										/>
 									</CardActionArea>
 								</Card>
@@ -114,7 +123,7 @@ const TopAlbumDownload = ({ history }) => {
 					<Button
 						variant="text"
 						size="small"
-						color="inherit"
+						color="primary"
 						onClick={load}
 						style={{ display: "block", margin: "auto" }}
 						disabled={loading}

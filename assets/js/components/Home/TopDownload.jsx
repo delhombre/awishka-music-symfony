@@ -4,14 +4,15 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import cyan from "@material-ui/core/colors/cyan";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import cyan from "@material-ui/core/colors/cyan";
+import { makeStyles } from "@material-ui/core/styles";
 import GetAppRoundedIcon from "@material-ui/icons/GetAppRounded";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import { extractUrl } from "../../helpers";
 import { UsePagination } from "../../hooks/UsePagination";
 import HorizontalScroll from "./HorizontalScroll";
 
@@ -61,9 +62,11 @@ const useStyles = makeStyles((theme) => ({
 const TopDownload = ({ history }) => {
 	const classes = useStyles();
 
-	const { items: musics, loading, load } = UsePagination(
-		"/apip/music?itemsPerPage=6&order[downloadCount]=desc"
-	);
+	const {
+		items: musics,
+		loading,
+		load,
+	} = UsePagination("/apip/music?itemsPerPage=6&order[downloadCount]=desc");
 
 	useEffect(() => {
 		load();
@@ -89,7 +92,7 @@ const TopDownload = ({ history }) => {
 									component="img"
 									alt={music.title}
 									className={classes.media}
-									image={music.coverUrl}
+									image={extractUrl(music.coverUrl)}
 								/>
 							) : (
 								<Skeleton variant="rect" width={180} height={180} />

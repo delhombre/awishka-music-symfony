@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Titles = ({ title, subtitle }) => {
+const Titles = ({ title, subtitle, ...props }) => {
 	const classes = useStyles();
 	return (
-		<div className={classes.container}>
+		<div className={classes.container} {...props}>
 			<Typography className={classes.title}>{title}</Typography>
 			<Typography className={classes.subtitle}>{subtitle}</Typography>
 		</div>

@@ -5,13 +5,14 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 import GetAppRoundedIcon from "@material-ui/icons/GetAppRounded";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import config from "../../config";
+import { extractUrl } from "../../helpers";
 import { UsePagination } from "../../hooks/UsePagination";
 import musicAPI from "../../services/musicAPI";
 
@@ -35,9 +36,13 @@ const useStyles = makeStyles((theme) => ({
 const AllMusics = ({ history }) => {
 	const classes = useStyles();
 
-	const { items: musics, loading, load, count, hasMore } = UsePagination(
-		"/apip/music?itemsPerPage=15"
-	);
+	const {
+		items: musics,
+		loading,
+		load,
+		count,
+		hasMore,
+	} = UsePagination("/apip/music?itemsPerPage=15");
 
 	const { download, LikeButton } = musicAPI;
 	const { API_URL } = config;
@@ -90,7 +95,7 @@ const AllMusics = ({ history }) => {
 										component="img"
 										alt={music.title}
 										title={music.title}
-										image={music.coverUrl}
+										image={extractUrl(music.coverUrl)}
 									/>
 								</CardActionArea>
 							</Card>

@@ -6,13 +6,14 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 import GetAppRoundedIcon from "@material-ui/icons/GetAppRounded";
 import WhatshotRoundedIcon from "@material-ui/icons/WhatshotRounded";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import { extractUrl } from "../../helpers";
 import { UsePagination } from "../../hooks/UsePagination";
 import musicAPI from "../../services/musicAPI";
 import Titles from "./Titles";
@@ -32,15 +33,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 	background: {
 		background: "white",
+		padding: theme.spacing(4),
+		borderRadius: theme.spacing(2),
 	},
 }));
 
 const TopLike = ({ history }) => {
 	const classes = useStyles();
 
-	const { items: musics, loading, load, hasMore } = UsePagination(
-		"/apip/music?itemsPerPage=7&order[likesCount]=desc"
-	);
+	const {
+		items: musics,
+		loading,
+		load,
+		hasMore,
+	} = UsePagination("/apip/music?itemsPerPage=7&order[likesCount]=desc");
 
 	const { download, LikeButton } = musicAPI;
 
@@ -53,6 +59,7 @@ const TopLike = ({ history }) => {
 			<Titles
 				title="Les titres les mieux notés"
 				subtitle="Titres avec plus de flammes"
+				style={{ marginTop: "2rem", marginBottom: "2rem" }}
 			/>
 			<div className={classes.background}>
 				{(loading ? Array.from(new Array(7)) : musics).map((music, index) => (
@@ -82,7 +89,7 @@ const TopLike = ({ history }) => {
 											className={classes.image}
 											component="img"
 											alt={music.title}
-											image={music.coverUrl}
+											image={extractUrl(music.coverUrl)}
 										/>
 									</CardActionArea>
 								</Card>
