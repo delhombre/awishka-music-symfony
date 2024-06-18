@@ -23,6 +23,10 @@ class AppFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
+        $faker->addProvider(new \Mmo\Faker\PicsumProvider($faker));
+        $faker->addProvider(new \Mmo\Faker\LoremSpaceProvider($faker));
+        $faker->addProvider(new \Mmo\Faker\FakeimgProvider($faker));
+
         $user = new User();
         $user->setUsername("SomeOne")
             ->setEmail("someone@email.com")
@@ -40,7 +44,7 @@ class AppFixtures extends Fixture
             $album = new Album();
             $album->setTitle($faker->streetName())
                 ->setAuthor($user)
-                ->setCover($faker->imageUrl())
+                ->setCover($faker->picsumUrl())
                 ->setCreatedAt($faker->dateTimeBetween("-4months"))
                 ->setUpdatedAt($faker->dateTimeBetween("-2 months"));
             $manager->persist($album);
@@ -50,8 +54,8 @@ class AppFixtures extends Fixture
                 $music->setTitle($faker->safeColorName())
                     ->setAlbum($album)
                     ->setCategory($category)
-                    ->setImage($faker->imageUrl())
-                    ->setCoverUrl($faker->imageUrl())
+                    ->setImage($faker->picsumUrl())
+                    ->setCoverUrl($faker->picsumUrl())
                     ->setSong($faker->name())
                     ->setSongUrl("/upload/music/song/_La_Comté_(The_Shire)(256k).mp3")
                     ->setAuthor($user)
